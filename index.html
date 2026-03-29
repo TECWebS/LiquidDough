@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Liquid Dough | Bakery | Oklahoma City, OK</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5efe4;
+      --warm-white: #fdf8f0;
+      --chocolate: #3b1f0e;
+      --caramel: #b5762a;
+      --tan: #d4a76a;
+      --sage: #7a8c6e;
+      --rust: #b84c2b;
+      --light-tan: #e8d5b7;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--warm-white);
+      color: var(--chocolate);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      height: 80px;
+      background: rgba(253,248,240,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light-tan);
+    }
+    .nav-logo img { height: 56px; transition: transform .3s; }
+    .nav-logo img:hover { transform: rotate(-5deg) scale(1.05); }
+    .nav-verse {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: var(--caramel);
+      font-size: .95rem;
+      letter-spacing: .04em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--chocolate);
+      font-size: .9rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      position: relative;
+      padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--caramel);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+      overflow: hidden;
+    }
+    .hero-left {
+      background: var(--chocolate);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 5rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 80% 20%, rgba(181,118,42,.25) 0%, transparent 65%);
+    }
+    .hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--tan);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .7s .3s forwards;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 6rem);
+      font-weight: 900;
+      line-height: 1;
+      color: var(--cream);
+      margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .7s .5s forwards;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--tan);
+      display: block;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--light-tan);
+      max-width: 380px;
+      margin-bottom: 2.5rem;
+      opacity: 0; animation: fadeUp .7s .7s forwards;
+    }
+    .btn {
+      display: inline-block;
+      padding: .85rem 2.2rem;
+      background: var(--caramel);
+      color: #fff;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 2px solid var(--caramel);
+      transition: background .25s, color .25s, transform .2s;
+      opacity: 0; animation: fadeUp .7s .9s forwards;
+    }
+    .btn:hover { background: transparent; color: var(--caramel); transform: translateY(-2px); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transform: scale(1.08);
+      animation: slowZoom 8s ease-out forwards;
+    }
+    .hero-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--chocolate) 0%, transparent 30%);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--caramel);
+      overflow: hidden;
+      padding: .9rem 0;
+      white-space: nowrap;
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-inner span {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #fff;
+      padding: 0 2rem;
+    }
+    .marquee-inner span::before {
+      content: '✦';
+      margin-right: 1.5rem;
+      font-size: .8rem;
+      vertical-align: middle;
+    }
+
+    /* ── GUT HEALTHY SECTION ── */
+    .gut-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+    }
+    .gut-img {
+      overflow: hidden;
+    }
+    .gut-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .8s ease;
+    }
+    .gut-img:hover img { transform: scale(1.04); }
+    .gut-text {
+      background: var(--cream);
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem;
+    }
+    .tag-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+    }
+    .gut-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+    }
+    .gut-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #5a3e2b;
+      max-width: 420px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── FACTS SECTION ── */
+    .facts-section {
+      background: var(--chocolate);
+      padding: 6rem 4rem;
+    }
+    .facts-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .facts-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: var(--cream);
+      font-weight: 900;
+    }
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .fact-card {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(181,118,42,.3);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, border-color .3s;
+    }
+    .fact-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--caramel);
+    }
+    .fact-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: var(--tan);
+      line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .fact-card p {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--light-tan);
+    }
+
+    /* ── MARQUEE 2 (Weight over Volume) ── */
+    .marquee-wrap-2 {
+      background: var(--cream);
+      overflow: hidden;
+      padding: .9rem 0;
+      white-space: nowrap;
+      border-top: 2px solid var(--light-tan);
+      border-bottom: 2px solid var(--light-tan);
+    }
+    .marquee-inner-2 {
+      display: inline-block;
+      animation: marquee 25s linear infinite reverse;
+    }
+    .marquee-inner-2 span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--chocolate);
+      padding: 0 2rem;
+      letter-spacing: .05em;
+    }
+    .marquee-inner-2 span::before { content: '⚖️ '; }
+
+    /* ── BOTTOM IMG SECTION ── */
+    .welcome-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 65vh;
+    }
+    .welcome-text {
+      background: var(--rust);
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 5rem 4rem;
+    }
+    .welcome-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    .welcome-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: rgba(255,255,255,.85);
+      max-width: 380px;
+      margin-bottom: 2rem;
+    }
+    .btn-light {
+      display: inline-block;
+      padding: .85rem 2.2rem;
+      background: transparent;
+      color: #fff;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: 2px solid #fff;
+      transition: background .25s, color .25s, transform .2s;
+    }
+    .btn-light:hover { background: #fff; color: var(--rust); transform: translateY(-2px); }
+    .welcome-img { overflow: hidden; }
+    .welcome-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--chocolate);
+      padding: 3.5rem 4rem 2rem;
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      margin-bottom: 1.5rem;
+    }
+    .footer-brand img { height: 60px; margin-bottom: .5rem; }
+    .footer-brand p {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: var(--tan);
+      font-size: .9rem;
+    }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: .6rem; }
+    .footer-links a {
+      color: var(--light-tan);
+      text-decoration: none;
+      font-size: .85rem;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--tan); }
+    .footer-socials { display: flex; gap: 1rem; align-items: center; }
+    .footer-socials a img { height: 30px; opacity: .8; transition: opacity .2s, transform .2s; }
+    .footer-socials a:hover img { opacity: 1; transform: scale(1.15); }
+    .footer-bottom {
+      text-align: center;
+      color: rgba(255,255,255,.3);
+      font-size: .78rem;
+      letter-spacing: .05em;
+    }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: none; }
+      from { opacity: 0; transform: translateY(20px); }
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes slowZoom {
+      from { transform: scale(1.08); }
+      to { transform: scale(1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-verse { display: none; }
+      .hero, .gut-section, .welcome-section { grid-template-columns: 1fr; }
+      .hero-left { padding: 3rem 1.5rem; }
+      .hero-right { height: 50vw; }
+      .gut-text { padding: 3rem 1.5rem; }
+      .facts-section { padding: 4rem 1.5rem; }
+      .welcome-text { padding: 3rem 1.5rem; }
+      .welcome-img { height: 50vw; }
+      footer { padding: 2.5rem 1.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+  </a>
+  <span class="nav-verse">Psalms 138:8</span>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="visit.html">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">We Are Gut Healthy</p>
+    <h1 class="hero-title">Liquid<em>Dough</em></h1>
+    <p class="hero-sub">We make it a point to serve healthy treats for long term benefits — adding probiotics and prebiotics to all of our baked goods with a healthy starter.</p>
+    <a href="about.html" class="btn">Learn More</a>
+  </div>
+  <div class="hero-right">
+    <img src="https://static.wixstatic.com/media/1f6547_e923fc2f458f4270861175bcdf9de500f000.jpg/v1/fill/w_552,h_469,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/1f6547_e923fc2f458f4270861175bcdf9de500f000.jpg" alt="Baked goods" />
+  </div>
+</section>
+
+<!-- ── MARQUEE 1 ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Liquid Dough</span><span>Gut Friendly</span><span>Baked with Love</span>
+    <span>Sourdough Starter</span><span>Oklahoma City</span><span>Probiotics &amp; Prebiotics</span>
+    <span>Liquid Dough</span><span>Gut Friendly</span><span>Baked with Love</span>
+    <span>Sourdough Starter</span><span>Oklahoma City</span><span>Probiotics &amp; Prebiotics</span>
+  </div>
+</div>
+
+<!-- ── GUT HEALTHY ── -->
+<section class="gut-section">
+  <div class="gut-img reveal">
+    <img src="https://static.wixstatic.com/media/1f6547_6398f8e70f8245a39f05de9786e76fa1~mv2.jpg/v1/fill/w_472,h_495,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/IMG_2337.jpg" alt="Fresh baked goods" />
+  </div>
+  <div class="gut-text reveal">
+    <p class="tag-label">Enter Banana Heaven</p>
+    <h2>Made for Your Body &amp; Your Soul</h2>
+    <p>Every bake we craft starts with a live sourdough starter — nature's original probiotic. We believe what's good for your gut is good for your soul.</p>
+    <a href="about.html" class="btn">Our Story</a>
+  </div>
+</section>
+
+<!-- ── FACTS ── -->
+<section class="facts-section">
+  <div class="facts-header reveal">
+    <h2>Fun Facts</h2>
+  </div>
+  <div class="facts-grid">
+    <div class="fact-card reveal">
+      <div class="fact-number">150</div>
+      <p>⚖️ <strong>Flour is a shapeshifter!</strong> When using a 1 cup scoop, your flour can weigh anywhere from 110–150 grams. A kitchen scale keeps it precise. Precision = perfect cookies!</p>
+    </div>
+    <div class="fact-card reveal">
+      <div class="fact-number">120</div>
+      <p>🥖 The oldest bread starter is over <strong>120 years old!</strong> Some bakers pass their sourdough starter down like a family heirloom — it just needs regular feeding to live forever.</p>
+    </div>
+    <div class="fact-card reveal">
+      <div class="fact-number">02</div>
+      <p>🍞 <strong>No 2 sourdough starters are the same.</strong> Each has its own unique blend of wild yeasts and bacteria, influenced by its environment.</p>
+    </div>
+    <div class="fact-card reveal">
+      <div class="fact-number">5,000</div>
+      <p>🌍 Sourdough is the original bread — people have been baking with wild yeast and starter cultures for over <strong>5,000 years!</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE 2 (Weight over Volume) ── -->
+<div class="marquee-wrap-2" aria-hidden="true">
+  <div class="marquee-inner-2">
+    <span>Weight over Volume</span><span>Weight over Volume</span>
+    <span>Weight over Volume</span><span>Weight over Volume</span>
+    <span>Weight over Volume</span><span>Weight over Volume</span>
+    <span>Weight over Volume</span><span>Weight over Volume</span>
+  </div>
+</div>
+
+<!-- ── WELCOME CHOCOLATE LOVERS ── -->
+<section class="welcome-section">
+  <div class="welcome-text reveal">
+    <h2>Welcome All Chocolate Lovers</h2>
+    <p>At Liquid Dough, we believe that what's good for your gut is good for your soul. Come taste the difference.</p>
+    <a href="about.html" class="btn-light">Get to Know Us</a>
+  </div>
+  <div class="welcome-img reveal">
+    <img src="https://static.wixstatic.com/media/1f6547_3e71a06a9eda459e819064f5dddfe712~mv2.jpg/v1/fill/w_785,h_629,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/1f6547_3e71a06a9eda459e819064f5dddfe712~mv2.jpg" alt="Chocolate baked goods" />
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+      <p>Psalms 138:8</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="visit.html">Visit Us</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/liquiddough_" target="_blank">
+        <img src="https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png" alt="Instagram" />
+      </a>
+      <a href="https://www.threads.com/@liquiddough_" target="_blank">
+        <img src="https://static.wixstatic.com/media/11062b_203532116d954961af6765993d2319a5~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_203532116d954961af6765993d2369a5~mv2.png" alt="Threads" />
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=61576407923630" target="_blank">
+        <img src="https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png" alt="Facebook" />
+      </a>
+      <a href="https://www.tiktok.com/@liquid.dough" target="_blank">
+        <img src="https://static.wixstatic.com/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok" />
+      </a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 Liquid Dough. Oklahoma City, OK.</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 100);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

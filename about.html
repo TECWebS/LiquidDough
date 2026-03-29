@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | Liquid Dough</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5efe4;
+      --warm-white: #fdf8f0;
+      --chocolate: #3b1f0e;
+      --caramel: #b5762a;
+      --tan: #d4a76a;
+      --sage: #7a8c6e;
+      --rust: #b84c2b;
+      --light-tan: #e8d5b7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--warm-white); color: var(--chocolate); font-family: 'Lato', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 80px;
+      background: rgba(253,248,240,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light-tan);
+    }
+    .nav-logo img { height: 56px; transition: transform .3s; }
+    .nav-logo img:hover { transform: rotate(-5deg) scale(1.05); }
+    .nav-verse { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--caramel); font-size: .95rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--chocolate); font-size: .9rem;
+      font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--caramel);
+      transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+    /* HERO */
+    .about-hero {
+      margin-top: 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+    }
+    .about-hero-img { overflow: hidden; }
+    .about-hero-img img { width: 100%; height: 100%; object-fit: cover; animation: slowZoom 8s ease-out forwards; }
+    .about-hero-text {
+      background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem;
+    }
+    .about-hero-text .tag-label { font-size: .7rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+    .about-hero-text h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 900; line-height: 1.15; margin-bottom: 1.5rem;
+      opacity: 0; animation: fadeUp .7s .3s forwards;
+    }
+    .about-hero-text p {
+      font-size: 1rem; line-height: 1.8; color: #5a3e2b; max-width: 440px;
+      opacity: 0; animation: fadeUp .7s .5s forwards;
+    }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--caramel); overflow: hidden; padding: .9rem 0; white-space: nowrap; }
+    .marquee-inner { display: inline-block; animation: marquee 22s linear infinite; }
+    .marquee-inner span { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.4rem; color: #fff; padding: 0 2rem; }
+    .marquee-inner span::before { content: '✦'; margin-right: 1.5rem; font-size: .8rem; vertical-align: middle; }
+
+    /* WHY SOURDOUGH */
+    .why-section { padding: 6rem 4rem; max-width: 900px; margin: 0 auto; text-align: center; }
+    .why-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 900; margin-bottom: .5rem; }
+    .why-section h2 em { font-style: italic; color: var(--caramel); display: block; }
+    .why-section p { font-size: 1rem; line-height: 1.85; color: #5a3e2b; margin-top: 1.5rem; }
+
+    /* STARTER CARD */
+    .starter-section {
+      background: var(--chocolate);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 60vh;
+    }
+    .starter-text { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .starter-text h3 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; color: var(--cream); margin-bottom: 1.5rem; }
+    .starter-text .starter-label { font-size: .7rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; color: var(--tan); margin-bottom: .75rem; }
+    .starter-text p { font-size: .95rem; line-height: 1.8; color: var(--light-tan); margin-bottom: 1.25rem; }
+    .ingredient-pill {
+      display: inline-block;
+      background: rgba(181,118,42,.2);
+      border: 1px solid var(--caramel);
+      color: var(--tan);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .4rem 1rem;
+      margin: .25rem .25rem 0 0;
+    }
+    .starter-img { overflow: hidden; }
+    .starter-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s ease; }
+    .starter-img:hover img { transform: scale(1.04); }
+
+    /* FAQ */
+    .faq-section { padding: 6rem 4rem; max-width: 900px; margin: 0 auto; }
+    .faq-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.8rem); font-weight: 900; margin-bottom: 3rem; text-align: center; }
+    .faq-item {
+      border-bottom: 1px solid var(--light-tan);
+      padding: 0;
+      margin-bottom: 0;
+      overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; background: none; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 0;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem; font-weight: 700; color: var(--chocolate);
+      text-align: left; gap: 1rem;
+    }
+    .faq-q span { font-size: 1.4rem; line-height: 1; transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-q span { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      font-size: .95rem; line-height: 1.8; color: #5a3e2b;
+      transition: max-height .4s ease, padding .4s ease;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
+
+    /* FOOTER */
+    footer { background: var(--chocolate); padding: 3.5rem 4rem 2rem; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 1.5rem; }
+    .footer-brand img { height: 60px; margin-bottom: .5rem; }
+    .footer-brand p { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--tan); font-size: .9rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: .6rem; }
+    .footer-links a { color: var(--light-tan); text-decoration: none; font-size: .85rem; letter-spacing: .05em; transition: color .2s; }
+    .footer-links a:hover { color: var(--tan); }
+    .footer-socials { display: flex; gap: 1rem; align-items: center; }
+    .footer-socials a img { height: 30px; opacity: .8; transition: opacity .2s, transform .2s; }
+    .footer-socials a:hover img { opacity: 1; transform: scale(1.15); }
+    .footer-bottom { text-align: center; color: rgba(255,255,255,.3); font-size: .78rem; letter-spacing: .05em; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .tag-label { font-size: .7rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: none; } from { opacity: 0; transform: translateY(20px); } }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    @keyframes slowZoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-verse { display: none; }
+      .about-hero, .starter-section { grid-template-columns: 1fr; }
+      .about-hero-text { padding: 3rem 1.5rem; }
+      .about-hero-img { height: 55vw; }
+      .why-section, .faq-section { padding: 4rem 1.5rem; }
+      .starter-text { padding: 3rem 1.5rem; }
+      .starter-img { height: 55vw; }
+      footer { padding: 2.5rem 1.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+  </a>
+  <span class="nav-verse">Psalms 138:8</span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About Us</a></li>
+    <li><a href="visit.html">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-img">
+    <img src="https://static.wixstatic.com/media/11062b_d3035e46ddb74c469f4fc1bf6c858a73~mv2.jpg/v1/fill/w_610,h_640,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_d3035e46ddb74c469f4fc1bf6c858a73~mv2.jpg" alt="Textured Chocolate Squares" />
+  </div>
+  <div class="about-hero-text">
+    <p class="tag-label">At Liquid Dough</p>
+    <h1>We are dedicated to crafting gut-friendly breads &amp; homemade cookies</h1>
+    <p>Our bakes not only taste incredible — they actively support your digestive health. Every bite is intentional.</p>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Gut Friendly</span><span>Sourdough Starter</span><span>Probiotics</span>
+    <span>Prebiotics</span><span>Natural Fermentation</span><span>Liquid Dough</span>
+    <span>Gut Friendly</span><span>Sourdough Starter</span><span>Probiotics</span>
+    <span>Prebiotics</span><span>Natural Fermentation</span><span>Liquid Dough</span>
+  </div>
+</div>
+
+<!-- WHY SOURDOUGH -->
+<section class="why-section">
+  <div class="reveal">
+    <p class="tag-label" style="text-align:center;">Why We Love It</p>
+    <h2>Why We Love Sourdough Starter <em>(and Your Gut Will Too!)</em></h2>
+    <p>Our bakes start with a live sourdough starter — aka nature's original probiotic magic. This bubbly blend of wild yeast and good bacteria helps break down gluten and phytic acid, making treats easier to digest and nutrients easier to absorb. It's naturally preservative-free, packed with flavor, and even supports a happy gut. Who knew something so simple could do so much?</p>
+  </div>
+</section>
+
+<!-- STARTER BREAKDOWN -->
+<section class="starter-section">
+  <div class="starter-text reveal">
+    <p class="starter-label">The Science</p>
+    <h3>Sourdough Starter</h3>
+    <p class="starter-label" style="margin-top:.5rem">Ingredients</p>
+    <div style="margin-bottom:1.25rem;">
+      <span class="ingredient-pill">Whole Wheat Flour</span>
+      <span class="ingredient-pill">Water</span>
+    </div>
+    <p>Sourdough starter is a natural leavening agent made by fermenting flour and water. Unlike commercial yeast, it relies on wild yeasts and beneficial bacteria (mainly Lactobacillus) from the environment.</p>
+    <p class="starter-label" style="margin-top:1.25rem">How It Works</p>
+    <p>Over time, these microorganisms develop into a bubbly, tangy mixture that not only helps dough rise but also enhances flavor and digestibility. Think of it as a living, breathing ingredient that brings both nutrition and personality to every bake!</p>
+  </div>
+  <div class="starter-img reveal">
+    <img src="https://static.wixstatic.com/media/1f6547_bf2c45f946eb4ed4a650173739ef3ab2~mv2.png/v1/fill/w_991,h_973,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sourdough%20starter.png" alt="Sourdough Starter" />
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2 class="reveal">FAQs</h2>
+
+  <div class="faq-item reveal">
+    <button class="faq-q">🌾 What is a sourdough starter, anyway? <span>+</span></button>
+    <div class="faq-a">It's a live mix of flour and water fermented over time, full of wild yeast and good bacteria. It's what we use instead of commercial yeast to naturally leaven (raise) our baked goods.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🧠 Why is it better for digestion? <span>+</span></button>
+    <div class="faq-a">The natural fermentation process breaks down gluten and phytic acid, making our breads and cookies easier on the gut — and friendlier for sensitive tummies.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🦠 Does it help my gut health? <span>+</span></button>
+    <div class="faq-a">Yes! The beneficial Lactobacillus bacteria in sourdough can support a healthy microbiome, giving your digestive system some love with every bite.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🩸 Will it affect my blood sugar? <span>+</span></button>
+    <div class="faq-a">Sourdough has a lower glycemic impact compared to conventional breads, meaning it's less likely to spike your blood sugar and keeps you feeling satisfied longer.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🌿 Are there more nutrients in sourdough? <span>+</span></button>
+    <div class="faq-a">Absolutely! Fermentation makes nutrients like B vitamins, iron, and magnesium more available for your body to absorb.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🥖 Does it change the flavor? <span>+</span></button>
+    <div class="faq-a">Oh yes — in the best way. When using sourdough as a leavening agent, it adds a subtle tang and rich complexity. When using a small amount for nutritional benefits, it does not change the taste of your baked goods.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">😷 Will it make me sick? <span>+</span></button>
+    <div class="faq-a">Not at all — when handled properly, sourdough starter is safe and has been used for centuries! The acidity and good bacteria actually help keep harmful microbes out. We take extra care in our kitchen to keep it happy, healthy, and safe for you.</div>
+  </div>
+  <div class="faq-item reveal">
+    <button class="faq-q">🏡 Is it safe to make at home? <span>+</span></button>
+    <div class="faq-a">Yes! Making a sourdough starter at home is perfectly safe with clean utensils, filtered water, and a little patience. As it ferments, the acidity naturally prevents harmful bacteria from growing. Just follow a trusted recipe and keep it in a clean jar — you'll have your own bubbling magic in no time!</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+      <p>Psalms 138:8</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="visit.html">Visit Us</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/liquiddough_" target="_blank"><img src="https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png" alt="Instagram" /></a>
+      <a href="https://www.threads.com/@liquiddough_" target="_blank"><img src="https://static.wixstatic.com/media/11062b_203532116d954961af6765993d2319a5~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_203532116d954961af6765993d2319a5~mv2.png" alt="Threads" /></a>
+      <a href="https://www.facebook.com/profile.php?id=61576407923630" target="_blank"><img src="https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png" alt="Facebook" /></a>
+      <a href="https://www.tiktok.com/@liquid.dough" target="_blank"><img src="https://static.wixstatic.com/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok" /></a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 Liquid Dough. Oklahoma City, OK.</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visit Us | Liquid Dough</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Serif+Display:ital@0;1&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #f5efe4;
+      --warm-white: #fdf8f0;
+      --chocolate: #3b1f0e;
+      --caramel: #b5762a;
+      --tan: #d4a76a;
+      --sage: #7a8c6e;
+      --rust: #b84c2b;
+      --light-tan: #e8d5b7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--warm-white); color: var(--chocolate); font-family: 'Lato', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 80px;
+      background: rgba(253,248,240,0.92); backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--light-tan);
+    }
+    .nav-logo img { height: 56px; transition: transform .3s; }
+    .nav-logo img:hover { transform: rotate(-5deg) scale(1.05); }
+    .nav-verse { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--caramel); font-size: .95rem; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none; color: var(--chocolate); font-size: .9rem;
+      font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--caramel);
+      transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+    /* HERO */
+    .visit-hero {
+      margin-top: 80px;
+      background: var(--chocolate);
+      min-height: 55vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem;
+      position: relative; overflow: hidden;
+    }
+    .visit-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(181,118,42,.3) 0%, transparent 65%);
+    }
+    .visit-hero .tag-label { font-size: .7rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--tan); margin-bottom: 1.5rem; position: relative; opacity: 0; animation: fadeUp .6s .2s forwards; }
+    .visit-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 900; color: var(--cream); line-height: .95;
+      position: relative;
+      opacity: 0; animation: fadeUp .7s .4s forwards;
+    }
+    .visit-hero h1 em { font-style: italic; color: var(--tan); display: block; }
+
+    /* MARQUEE */
+    .marquee-wrap { background: var(--caramel); overflow: hidden; padding: .9rem 0; white-space: nowrap; }
+    .marquee-inner { display: inline-block; animation: marquee 20s linear infinite; }
+    .marquee-inner span { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 1.4rem; color: #fff; padding: 0 2rem; }
+    .marquee-inner span::before { content: '✦'; margin-right: 1.5rem; font-size: .8rem; vertical-align: middle; }
+
+    /* INTRO */
+    .intro-section { padding: 5rem 4rem; max-width: 840px; margin: 0 auto; text-align: center; }
+    .intro-section p { font-size: 1.1rem; line-height: 1.85; color: #5a3e2b; }
+
+    /* EVENTS SECTION */
+    .events-section { padding: 1rem 4rem 5rem; }
+    .events-header { text-align: center; margin-bottom: 3rem; }
+    .events-header h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 900; }
+    .events-header p { color: #5a3e2b; margin-top: .5rem; }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .event-card {
+      border-radius: 0;
+      overflow: hidden;
+      position: relative;
+      background: var(--chocolate);
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      transition: transform .3s;
+    }
+    .event-card:hover { transform: scale(1.02); }
+    .event-card img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .3s; }
+    .event-card:hover img { opacity: 1; }
+    .event-card .overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(59,31,14,.8) 0%, transparent 60%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.25rem;
+    }
+    .event-card .event-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: #fff; }
+
+    /* FEATURED CARD (wider) */
+    .event-card.featured { grid-column: span 2; aspect-ratio: 16/7; }
+    @media (max-width: 600px) { .event-card.featured { grid-column: span 1; aspect-ratio: 4/3; } }
+
+    /* COMING SOON */
+    .coming-soon {
+      background: var(--rust);
+      padding: 7rem 2rem;
+      text-align: center;
+    }
+    .coming-soon p { font-size: .85rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: 1rem; }
+    .coming-soon h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      font-weight: 900; color: #fff; line-height: .9;
+      letter-spacing: -.02em;
+    }
+    .coming-soon h2 em { font-style: italic; color: rgba(255,255,255,.6); }
+
+    /* PULSE ANIMATION on SOON */
+    .pulse-text {
+      display: inline-block;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .85; transform: scale(1.03); }
+    }
+
+    /* FOOTER */
+    footer { background: var(--chocolate); padding: 3.5rem 4rem 2rem; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,.1); margin-bottom: 1.5rem; }
+    .footer-brand img { height: 60px; margin-bottom: .5rem; }
+    .footer-brand p { font-family: 'DM Serif Display', serif; font-style: italic; color: var(--tan); font-size: .9rem; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: .6rem; }
+    .footer-links a { color: var(--light-tan); text-decoration: none; font-size: .85rem; letter-spacing: .05em; transition: color .2s; }
+    .footer-links a:hover { color: var(--tan); }
+    .footer-socials { display: flex; gap: 1rem; align-items: center; }
+    .footer-socials a img { height: 30px; opacity: .8; transition: opacity .2s, transform .2s; }
+    .footer-socials a:hover img { opacity: 1; transform: scale(1.15); }
+    .footer-bottom { text-align: center; color: rgba(255,255,255,.3); font-size: .78rem; letter-spacing: .05em; }
+
+    /* SCROLL REVEAL */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .tag-label { font-size: .7rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: none; } from { opacity: 0; transform: translateY(20px); } }
+    @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.5rem; }
+      .nav-verse { display: none; }
+      .intro-section, .events-section { padding: 3rem 1.5rem; }
+      footer { padding: 2.5rem 1.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+  </a>
+  <span class="nav-verse">Psalms 138:8</span>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="visit.html" class="active">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="visit-hero">
+  <p class="tag-label">Find Us In Person</p>
+  <h1>Visit<em>Us</em></h1>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>Pop-Up Events</span><span>Farmers Markets</span><span>Oklahoma City</span>
+    <span>Micro-Bakery</span><span>Community Made</span><span>Liquid Dough</span>
+    <span>Pop-Up Events</span><span>Farmers Markets</span><span>Oklahoma City</span>
+    <span>Micro-Bakery</span><span>Community Made</span><span>Liquid Dough</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<section class="intro-section reveal">
+  <p>We are excited to share that our micro-bakery will be selling in person at local pop-up events and farmers markets whenever available! This is a fantastic opportunity for us to connect directly with our community and bring our delicious, freshly baked treats to you. While we're starting small, we have big plans to expand and eventually open up online orders, allowing us to share our goodies with even more people. We can't wait to grow and spread the joy of our handmade baked goods to a wider audience. Your support means the world to us as we continue to bake, create, and make lasting connections with all of you!</p>
+</section>
+
+<!-- EVENTS GRID -->
+<section class="events-section">
+  <div class="events-header reveal">
+    <p class="tag-label" style="display:block;text-align:center;">Where You Can Find Us</p>
+    <h2>Come support us at our upcoming events!</h2>
+  </div>
+
+  <div class="events-grid">
+
+    <div class="event-card reveal">
+      <img src="https://static.wixstatic.com/media/1f6547_bfddc54ac0504b8aaf53e5820094a819~mv2.jpg/v1/fill/w_316,h_312,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/1st%20vendor_edited.jpg" alt="First Vendor Event" />
+      <div class="overlay"><p class="event-name">First Vendor Event</p></div>
+    </div>
+
+    <div class="event-card reveal">
+      <img src="https://static.wixstatic.com/media/1f6547_0e22e1131345427fbcdc6cbb51d9da68~mv2.jpg/v1/fill/w_458,h_228,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Wanderlust%20Event_edited.jpg" alt="Wanderlust Event" />
+      <div class="overlay"><p class="event-name">Wanderlust Event</p></div>
+    </div>
+
+    <div class="event-card featured reveal">
+      <a href="https://www.risingcollectiveok.com/events-2-1/pop-up-collective" target="_blank" style="display:contents;">
+        <img src="https://static.wixstatic.com/media/1f6547_74b8b649b2a641808ac826ee13a9f2d6~mv2.jpg/v1/fill/w_632,h_312,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Pop%20up_edited.jpg" alt="Pop-Up Collective" />
+        <div class="overlay">
+          <p class="event-name">Pop-Up Collective ↗</p>
+        </div>
+      </a>
+    </div>
+
+    <div class="event-card reveal">
+      <img src="https://static.wixstatic.com/media/1f6547_6ae70314b3c64579b952924faf403c51~mv2.jpg/v1/fill/w_304,h_406,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Sailor%20and%20the%20Dock_edited.jpg" alt="Sailor and the Dock" />
+      <div class="overlay"><p class="event-name">Sailor and the Dock</p></div>
+    </div>
+
+    <div class="event-card reveal">
+      <img src="https://static.wixstatic.com/media/1f6547_40e20e6416f8457982b099a487e6d54e~mv2.jpg/v1/crop/x_0,y_63,w_325,h_199/fill/w_510,h_312,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/bws%20pop%20up_edited.jpg" alt="BWS Pop Up" />
+      <div class="overlay"><p class="event-name">BWS Pop-Up</p></div>
+    </div>
+
+    <div class="event-card reveal">
+      <img src="https://static.wixstatic.com/media/1f6547_eddd7ff474cf45d194e2bd8bcd816802~mv2.jpg/v1/fill/w_316,h_406,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/MAS%20Tulsa_edited.jpg" alt="MAS Tulsa" />
+      <div class="overlay"><p class="event-name">MAS Tulsa</p></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMING SOON -->
+<div class="coming-soon">
+  <p>Online orders</p>
+  <h2 class="pulse-text">Coming<em>Soon</em></h2>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="https://static.wixstatic.com/media/1f6547_4c6fc7a312854b838bf3c9f92f42eb90~mv2.png/v1/fill/w_112,h_112,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Liquid%20D%20LOGO.png" alt="Liquid Dough Logo" />
+      <p>Psalms 138:8</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="visit.html">Visit Us</a></li>
+    </ul>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/liquiddough_" target="_blank"><img src="https://static.wixstatic.com/media/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_55e4be1e75564866b6c28290f9a9d271~mv2.png" alt="Instagram" /></a>
+      <a href="https://www.threads.com/@liquiddough_" target="_blank"><img src="https://static.wixstatic.com/media/11062b_203532116d954961af6765993d2319a5~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_203532116d954961af6765993d2319a5~mv2.png" alt="Threads" /></a>
+      <a href="https://www.facebook.com/profile.php?id=61576407923630" target="_blank"><img src="https://static.wixstatic.com/media/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_2381e8a6e7444f4f902e7b649aa3f0ac~mv2.png" alt="Facebook" /></a>
+      <a href="https://www.tiktok.com/@liquid.dough" target="_blank"><img src="https://static.wixstatic.com/media/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png/v1/fill/w_39,h_39,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/11062b_69d309d6dbde492fae325fb0deca6556~mv2.png" alt="TikTok" /></a>
+    </div>
+  </div>
+  <p class="footer-bottom">© 2026 Liquid Dough. Oklahoma City, OK.</p>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
