@@ -123,12 +123,20 @@
       font-size: 1rem; font-weight: 700; color: var(--chocolate);
       text-align: left; gap: 1rem;
     }
-    .faq-q span { font-size: 1.4rem; line-height: 1; transition: transform .3s; flex-shrink: 0; }
-    .faq-item.open .faq-q span { transform: rotate(45deg); }
+    .faq-q-inner {
+      display: flex; align-items: center; gap: .75rem;
+    }
+    .faq-icon {
+      width: 22px; height: 22px; flex-shrink: 0;
+      color: var(--caramel);
+    }
+    .faq-q .faq-plus { font-size: 1.4rem; line-height: 1; transition: transform .3s; flex-shrink: 0; }
+    .faq-item.open .faq-q .faq-plus { transform: rotate(45deg); }
     .faq-a {
       max-height: 0; overflow: hidden;
       font-size: .95rem; line-height: 1.8; color: #5a3e2b;
       transition: max-height .4s ease, padding .4s ease;
+      padding-left: 2.75rem;
     }
     .faq-item.open .faq-a { max-height: 300px; padding-bottom: 1.25rem; }
 
@@ -237,38 +245,129 @@
 <section class="faq-section">
   <h2 class="reveal">FAQs</h2>
 
+  <!-- Wheat / grain icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🌾 What is a sourdough starter, anyway? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2v20M8 6c0 0 1.5 2 4 2s4-2 4-2M7 10c0 0 2 2 5 2s5-2 5-2M8 14c0 0 1.5 2 4 2s4-2 4-2M9 18c0 0 1 1.5 3 1.5S15 18 15 18"/>
+        </svg>
+        What is a sourdough starter, anyway?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">It's a live mix of flour and water fermented over time, full of wild yeast and good bacteria. It's what we use instead of commercial yeast to naturally leaven (raise) our baked goods.</div>
   </div>
+
+  <!-- Brain / mind icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🧠 Why is it better for digestion? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9.5 2a4.5 4.5 0 0 1 4.5 4.5v.5h.5a3.5 3.5 0 0 1 0 7H14v.5a4.5 4.5 0 0 1-9 0V14h-.5a3.5 3.5 0 0 1 0-7H5v-.5A4.5 4.5 0 0 1 9.5 2z"/>
+          <path d="M14.5 9.5H19M14.5 14.5H18"/>
+        </svg>
+        Why is it better for digestion?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">The natural fermentation process breaks down gluten and phytic acid, making our breads and cookies easier on the gut — and friendlier for sensitive tummies.</div>
   </div>
+
+  <!-- Microbe / cell icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🦠 Does it help my gut health? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          <circle cx="12" cy="12" r="1.5" fill="currentColor" stroke="none"/>
+        </svg>
+        Does it help my gut health?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Yes! The beneficial Lactobacillus bacteria in sourdough can support a healthy microbiome, giving your digestive system some love with every bite.</div>
   </div>
+
+  <!-- Blood drop / droplet icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🩸 Will it affect my blood sugar? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2C12 2 5 10 5 15a7 7 0 0 0 14 0c0-5-7-13-7-13z"/>
+          <path d="M9 16a3 3 0 0 0 3 2"/>
+        </svg>
+        Will it affect my blood sugar?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Sourdough has a lower glycemic impact compared to conventional breads, meaning it's less likely to spike your blood sugar and keeps you feeling satisfied longer.</div>
   </div>
+
+  <!-- Leaf / plant icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🌿 Are there more nutrients in sourdough? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 22c0 0 4-10 10-12 4-1.5 8 0 10-6-6 0-10 2-12 6C8 14 6 18 2 22z"/>
+          <path d="M2 22l8-8"/>
+        </svg>
+        Are there more nutrients in sourdough?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Absolutely! Fermentation makes nutrients like B vitamins, iron, and magnesium more available for your body to absorb.</div>
   </div>
+
+  <!-- Loaf / bread icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🥖 Does it change the flavor? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 13V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/>
+          <path d="M20 13a4 4 0 0 0-8 0 4 4 0 0 0-8 0"/>
+          <line x1="8" y1="13" x2="8" y2="20"/>
+          <line x1="16" y1="13" x2="16" y2="20"/>
+          <line x1="12" y1="13" x2="12" y2="20"/>
+        </svg>
+        Does it change the flavor?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Oh yes — in the best way. When using sourdough as a leavening agent, it adds a subtle tang and rich complexity. When using a small amount for nutritional benefits, it does not change the taste of your baked goods.</div>
   </div>
+
+  <!-- Shield / safety icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">😷 Will it make me sick? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+        Will it make me sick?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Not at all — when handled properly, sourdough starter is safe and has been used for centuries! The acidity and good bacteria actually help keep harmful microbes out. We take extra care in our kitchen to keep it happy, healthy, and safe for you.</div>
   </div>
+
+  <!-- Home / house icon -->
   <div class="faq-item reveal">
-    <button class="faq-q">🏡 Is it safe to make at home? <span>+</span></button>
+    <button class="faq-q">
+      <span class="faq-q-inner">
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+          <path d="M9 21V12h6v9"/>
+        </svg>
+        Is it safe to make at home?
+      </span>
+      <span class="faq-plus">+</span>
+    </button>
     <div class="faq-a">Yes! Making a sourdough starter at home is perfectly safe with clean utensils, filtered water, and a little patience. As it ferments, the acidity naturally prevents harmful bacteria from growing. Just follow a trusted recipe and keep it in a clean jar — you'll have your own bubbling magic in no time!</div>
   </div>
+
 </section>
 
 <!-- FOOTER -->
