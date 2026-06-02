@@ -1,16 +1,16 @@
 /* ============================================================
    LIQUID DOUGH — main.js
    ============================================================ */
-
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ── SCROLL REVEAL ── */
-  const revealEls = document.querySelectorAll('.reveal');
+  const revealEls = Array.from(document.querySelectorAll('.reveal'));
+
   const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // stagger siblings slightly
-        const delay = (i % 4) * 80;
+        const index = revealEls.indexOf(entry.target);
+        const delay = (index % 4) * 80;
         setTimeout(() => entry.target.classList.add('visible'), delay);
         revealObserver.unobserve(entry.target);
       }
@@ -18,5 +18,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.12 });
 
   revealEls.forEach(el => revealObserver.observe(el));
+
+  /* ── FAQ ACCORDION (about.html) ── */
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 
 });
