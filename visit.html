@@ -55,32 +55,32 @@
       <h2>Former pop-ups &amp; markets</h2>
     </div>
     <div class="flyer-grid">
-      <a class="flyer past reveal" href="images/soul-food-festival.jpg" target="_blank" rel="noopener">
-        <img src="images/soul-food-festival.jpg" alt="Flyer: Oklahoma Soul Food Festival" loading="lazy" />
+      <a class="flyer past reveal" href="images/1st%20vendor_edited.jpg" target="_blank" rel="noopener">
+        <img src="images/1st%20vendor_edited.jpg" alt="Flyer: Oklahoma Soul Food Festival" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/rising-popup-collective.jpg" target="_blank" rel="noopener">
-        <img src="images/rising-popup-collective.jpg" alt="Flyer: Rising Co. Pop-Up Collective" loading="lazy" />
+      <a class="flyer past reveal" href="images/Sailor%20and%20the%20Dock_edited.jpg" target="_blank" rel="noopener">
+        <img src="images/Sailor%20and%20the%20Dock_edited.jpg" alt="Flyer: Rising Co. Pop-Up Collective" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/black-wall-street-marketplace.jpg" target="_blank" rel="noopener">
-        <img src="images/black-wall-street-marketplace.jpg" alt="Flyer: The Original Black Wall Street Merchant Marketplace" loading="lazy" />
+      <a class="flyer past reveal" href="images/bws%20pop%20up.png" target="_blank" rel="noopener">
+        <img src="images/bws%20pop%20up.png" alt="Flyer: The Original Black Wall Street Merchant Marketplace" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/wanderlust-popup-shops.jpg" target="_blank" rel="noopener">
-        <img src="images/wanderlust-popup-shops.jpg" alt="Flyer: Wanderlust Pop Up Shops" loading="lazy" />
+      <a class="flyer past reveal" href="images/Wanderlust%20Event_edited.jpg" target="_blank" rel="noopener">
+        <img src="images/Wanderlust%20Event_edited.jpg" alt="Flyer: Wanderlust Pop Up Shops" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/west-village-popup-market.jpg" target="_blank" rel="noopener">
-        <img src="images/west-village-popup-market.jpg" alt="Flyer: West Village Pop-Up Market" loading="lazy" />
+      <a class="flyer past reveal" href="images/Pop%20up_edited.jpg" target="_blank" rel="noopener">
+        <img src="images/Pop%20up_edited.jpg" alt="Flyer: West Village Pop-Up Market" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/mas-tulsa.jpg" target="_blank" rel="noopener">
-        <img src="images/mas-tulsa.jpg" alt="Flyer: MAS Tulsa Caribbean Carnivale" loading="lazy" />
+      <a class="flyer past reveal" href="images/MAS%20Tulsa_edited.jpg" target="_blank" rel="noopener">
+        <img src="images/MAS%20Tulsa_edited.jpg" alt="Flyer: MAS Tulsa Caribbean Carnivale" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
-      <a class="flyer past reveal" href="images/groton-community-event.jpg" target="_blank" rel="noopener">
-        <img src="images/groton-community-event.jpg" alt="Flyer: Community Event, Groton CT" loading="lazy" />
+      <a class="flyer past reveal" href="images/ST.%20Johns%20pop%20up.jpg" target="_blank" rel="noopener">
+        <img src="images/ST.%20Johns%20pop%20up.jpg" alt="Flyer: Community Event, Groton CT" loading="lazy" />
         <span class="flyer-tag">Past event</span>
       </a>
     </div>
@@ -92,8 +92,13 @@
     <p>Stay in the loop</p>
     <h2>More in-person events <em class="pulse-text">in the future.</em></h2>
     <p class="coming-note">Subscribe to our newsletter and we'll let you know where we'll be next.</p>
-    <!-- TODO: replace # with your newsletter signup URL (for example a Mailchimp signup page) -->
-    <a href="#" class="btn-steel" target="_blank" rel="noopener">Subscribe to the Newsletter</a>
+    <form class="subscribe-form" data-api="/subscribe" novalidate>
+      <label class="sr-only" for="sub-email">Email address</label>
+      <input id="sub-email" type="email" name="email" placeholder="Your email address" required autocomplete="email">
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn-steel">Subscribe</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
   </section>
 
 
@@ -127,5 +132,6 @@
   </footer>
 
   <script src="scripts/main.js"></script>
+  <script src="scripts/forms.js"></script>
 </body>
 </html>
