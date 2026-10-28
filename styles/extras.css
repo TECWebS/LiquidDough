@@ -191,3 +191,37 @@ button.btn-rust { cursor: pointer; font-family: 'Lato', sans-serif; }
   .tier { border-left: 0; padding: 0; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ── CENTERING PASS ── */
+.story.first { padding-top: calc(72px + 4.5rem); }
+.treat-card, .offer-card, .menu-col, .tier { text-align: center; }
+.treat-card, .offer-card { display: flex; flex-direction: column; align-items: center; }
+.size-pills { justify-content: center; }
+.menu-col li { text-align: center; }
+.tier, .tier:first-child { padding: 0 1.75rem; }
+.inquire-grid { align-items: center; }
+.inquire-grid .section-head { text-align: center; }
+.starter-text { text-align: center; }
+.starter-text > div { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.story p:not(.pull):not(.signature) { text-align: left; }
+.story .signature { text-align: center; }
+
+/* ── VISIT PAGE: PAST EVENTS ── */
+.flyer-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem; max-width: 1100px; margin: 0 auto; align-items: start;
+}
+.flyer { display: block; background: var(--dark); overflow: hidden; transition: transform .3s; }
+.flyer:hover { transform: translateY(-4px); }
+.flyer img { display: block; width: 100%; height: auto; }
+.flyer.past img { filter: grayscale(1); opacity: .92; }
+.flyer.upcoming { outline: 3px solid var(--caramel); }
+.flyer-tag {
+  display: block; text-align: center; padding: .55rem; font-size: .68rem; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; background: var(--cream); color: var(--mid-gray);
+}
+.flyer.upcoming .flyer-tag { background: var(--caramel); color: #fff; }
+.coming-soon .btn-steel { margin-top: 2.25rem; display: inline-block; }
+.coming-soon .coming-note { margin: 1.5rem auto 0; max-width: 480px; text-transform: none; letter-spacing: 0; font-size: 1rem; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,.9); }
+@media (max-width: 900px) { .tier, .tier:first-child { padding: 0 1rem; } }
+.flyer, .flyer:hover { text-decoration: none; }
