@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treat Tuesdays — Liquid Dough</title>
+<meta name="description" content="Weekly dessert delivery for office teams, staff appreciation boxes, and dessert platters for meetings and events.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F2E9D8; --paper:#FBF6EA; --ink:#2B211A; --ink-soft:#5A4E42;
+    --crust:#3E2A1C; --olive:#7C8C55; --olive-dark:#4F5C33; --olive-tint:#E7ECD6;
+    --honey:#C8862F; --line:rgba(43,33,26,0.14); --radius:22px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--cream); color:var(--ink); font-family:'Work Sans',sans-serif; -webkit-font-smoothing:antialiased;}
+  a{color:inherit;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+
+  header{position:sticky; top:0; z-index:20; background:rgba(242,233,216,0.92); backdrop-filter:blur(6px); border-bottom:1px solid var(--line);}
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-mark{width:34px; height:34px; border-radius:50%; background:var(--crust); position:relative; flex:none;}
+  .brand-mark::after{content:""; position:absolute; inset:6px; border-radius:50%; background:var(--honey); opacity:.85;}
+  .brand-name{font-family:'Fraunces',serif; font-weight:600; font-size:19px;}
+  ul.links{display:flex; gap:30px; list-style:none; padding:0; margin:0;}
+  ul.links a{font-size:14px; text-decoration:none; color:var(--ink-soft); letter-spacing:.04em; text-transform:uppercase; font-weight:500; border-bottom:1px solid transparent; padding-bottom:3px;}
+  ul.links a:hover, ul.links a.active{color:var(--ink); border-color:var(--olive);}
+
+  .btn{display:inline-flex; align-items:center; padding:13px 26px; border-radius:999px; font-size:14px; font-weight:600; text-decoration:none; border:0; cursor:pointer; font-family:inherit; transition:transform .15s ease;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn-solid{background:var(--crust); color:var(--paper);}
+  .btn-outline{border:1.5px solid var(--crust); color:var(--crust); background:transparent;}
+
+  .hero{padding:76px 0 56px; display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
+  .script{font-family:'Caveat',cursive; font-size:26px; color:var(--olive-dark); margin:0 0 6px;}
+  .hero h1{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(40px,5.4vw,66px); line-height:1.03; margin:0 0 20px; letter-spacing:-.01em;}
+  .hero h1 em{font-style:italic; color:var(--olive-dark); font-weight:500;}
+  .lede{font-size:18px; line-height:1.6; color:var(--ink-soft); max-width:46ch; margin:0 0 28px;}
+  .ctas{display:flex; gap:14px; flex-wrap:wrap;}
+
+  /* weekly calendar signature element */
+  .week{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:0 12px 28px -18px rgba(43,33,26,.4);}
+  .week-title{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.14em; color:var(--olive-dark); margin:0 0 14px;}
+  .days{display:grid; grid-template-columns:repeat(5,1fr); gap:8px;}
+  .day{text-align:center; padding:14px 0; border-radius:14px; font-size:13px; font-weight:500; color:var(--ink-soft); border:1px dashed var(--line);}
+  .day.on{background:var(--crust); color:var(--paper); border:1px solid var(--crust); transform:translateY(-4px); font-weight:600;}
+  .day small{display:block; font-family:'Caveat',cursive; font-size:17px; margin-top:2px; color:var(--honey);}
+  .week-note{font-size:14px; color:var(--ink-soft); line-height:1.55; margin:16px 0 0;}
+
+  section{padding:60px 0;}
+  .kicker{font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.14em; color:var(--olive-dark); margin:0 0 10px;}
+  h2.title{font-family:'Fraunces',serif; font-weight:600; font-size:clamp(28px,3.4vw,40px); margin:0 0 10px; letter-spacing:-.01em;}
+  .sub{color:var(--ink-soft); font-size:16px; line-height:1.6; max-width:56ch; margin:0 0 36px;}
+
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .step{position:relative; padding-top:38px;}
+  .step::before{content:attr(data-n); position:absolute; top:0; left:0; width:30px; height:30px; border-radius:50%; background:var(--olive-dark); color:var(--paper); font-family:'Fraunces',serif; font-weight:600; font-size:15px; display:flex; align-items:center; justify-content:center;}
+  .step h3{margin:0 0 6px; font-size:17px;}
+  .step p{margin:0; color:var(--ink-soft); font-size:15px; line-height:1.6;}
+
+  .offers{display:grid; grid-template-columns:repeat(2,1fr); gap:22px;}
+  .card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:30px; position:relative;}
+  .card.feature{background:var(--crust); color:var(--paper); border-color:var(--crust);}
+  .card.feature p, .card.feature li{color:rgba(251,246,234,.85);}
+  .tag{display:inline-block; font-size:11px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; padding:5px 12px; border-radius:999px; background:var(--olive-tint); color:var(--olive-dark); margin-bottom:14px;}
+  .card.feature .tag{background:var(--honey); color:var(--crust);}
+  .card h3{font-family:'Fraunces',serif; font-weight:600; font-size:24px; margin:0 0 10px;}
+  .card p{margin:0 0 16px; color:var(--ink-soft); font-size:15.5px; line-height:1.65;}
+  .sizes{display:flex; gap:8px; flex-wrap:wrap; margin:0; padding:0; list-style:none;}
+  .sizes li{font-size:13px; font-weight:600; padding:7px 14px; border-radius:999px; border:1px solid currentColor; opacity:.9;}
+  .menu-line{margin-top:34px; text-align:center; font-family:'Caveat',cursive; font-size:26px; color:var(--ink-soft);}
+
+  .menu{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  .menu-col{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:28px;}
+  .menu-col h3{font-family:'Fraunces',serif; font-weight:600; font-size:22px; margin:0 0 8px;}
+  .menu-note{margin:0 0 12px; font-size:14px; color:var(--ink-soft); line-height:1.5;}
+  .menu-col ul{list-style:none; padding:0; margin:12px 0 0; display:grid; gap:10px;}
+  .menu-col li{font-size:16px; padding-bottom:10px; border-bottom:1px solid var(--line);}
+  .menu-col li:last-child{border-bottom:0; padding-bottom:0;}
+  .nut{display:inline-block; margin-left:6px; font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--honey);}
+  .menu-col.soon{border-style:dashed; background:transparent;}
+  .menu-col li.slot{color:var(--ink-soft); font-style:italic;}
+  .nutfree{margin-top:22px; padding:18px 24px; border-radius:var(--radius); background:var(--olive-tint); color:var(--olive-dark); font-size:15.5px; line-height:1.55;}
+
+  .perks{background:var(--olive-tint); border-radius:32px; margin:0 32px;}
+  .perks .wrap{padding:60px 32px;}
+  .tiers{display:grid; grid-template-columns:repeat(4,1fr); gap:0;}
+  .tier{padding:0 26px;}
+  .tier + .tier{border-left:1px solid var(--line);}
+  .tier:first-child{padding-left:0;}
+  .tier h3{margin:0 0 8px; font-size:16px;}
+  .tier .what{font-family:'Fraunces',serif; font-size:19px; font-weight:600; color:var(--olive-dark); margin:0 0 8px; line-height:1.25;}
+  .tier p{margin:0; font-size:14.5px; line-height:1.6; color:var(--ink-soft);}
+
+  .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:48px; align-items:start;}
+  form{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:32px; display:grid; gap:16px;}
+  .row{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  label{font-size:13px; font-weight:600; display:grid; gap:6px;}
+  input, select, textarea{font-family:inherit; font-size:15px; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--ink);}
+  input:focus, select:focus, textarea:focus{outline:2px solid var(--olive); outline-offset:1px;}
+  textarea{min-height:100px; resize:vertical;}
+  .fine{font-size:12.5px; color:var(--ink-soft); margin:0;}
+
+  footer{border-top:1px solid var(--line); padding:40px 0 34px; margin-top:30px;}
+  .foot{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:18px;}
+  .copy{font-size:13px; color:var(--ink-soft); text-align:center; margin-top:22px;}
+
+  @media (max-width:920px){
+    .hero{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr;}
+    .offers{grid-template-columns:1fr;}
+    .menu{grid-template-columns:1fr;}
+    .tiers{grid-template-columns:1fr 1fr; row-gap:30px;}
+    .tier:nth-child(3){border-left:none; padding-left:0;}
+    .contact-grid{grid-template-columns:1fr;}
+    ul.links{display:none;}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 20px;}
+    .perks .wrap{padding:44px 20px;}
+    .tiers{grid-template-columns:1fr;}
+    .tier{border-left:none !important; padding:0;}
+    .row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Liquid Dough</span></a>
+    <ul class="links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="corporate.html" class="active">Treat Tuesdays</a></li>
+      <li><a href="visit-us.html">Visit Us</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div>
+      <p class="script">for the office</p>
+      <h1>Make Tuesday the day <em>everyone</em> looks forward to.</h1>
+      <p class="lede">A weekly dessert delivery for your team, plus appreciation boxes, birthday treats, and dessert platters for meetings and events. Baked in small batches and delivered to your door.</p>
+      <div class="ctas">
+        <a href="#inquire" class="btn btn-solid">Request a quote</a>
+        <a href="#offerings" class="btn btn-outline">See what we offer</a>
+      </div>
+    </div>
+
+    <div class="week" aria-hidden="true">
+      <p class="week-title">Your week, improved</p>
+      <div class="days">
+        <div class="day">Mon</div>
+        <div class="day on">Tue<small>treats!</small></div>
+        <div class="day">Wed</div>
+        <div class="day">Thu</div>
+        <div class="day">Fri</div>
+      </div>
+      <p class="week-note">Cookies, brownies, muffins, and soon cupcakes, rotating so the break room never gets boring.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="kicker">How it works</p>
+    <h2 class="title">Simple for you, easy to repeat</h2>
+    <p class="sub">Tell us your headcount and how often you want treats. We handle the baking, packaging, and delivery.</p>
+    <div class="steps">
+      <div class="step" data-n="1"><h3>Pick a plan</h3><p>Choose a one-time order, a weekly delivery, or a monthly commitment.</p></div>
+      <div class="step" data-n="2"><h3>Choose a size</h3><p>Portions are based on your headcount, with a rotating menu so each week feels fresh.</p></div>
+      <div class="step" data-n="3"><h3>We deliver</h3><p>Treats show up packaged and ready to share. No prep or cleanup for your team.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="offerings">
+    <p class="kicker">What we offer</p>
+    <h2 class="title">Four ways to treat your team</h2>
+    <p class="sub">Start with Treat Tuesdays, or order just what you need for the occasion.</p>
+
+    <div class="offers">
+      <article class="card feature">
+        <span class="tag">Most popular</span>
+        <h3>Treat Tuesdays</h3>
+        <p>A weekly dessert delivery for your office team, with a small, medium, or large package based on headcount and a rotating menu.</p>
+        <ul class="sizes" aria-label="Example sizes"><li>20 portions</li><li>40 portions</li><li>75 portions</li></ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">Staff appreciation</span>
+        <h3>Employee Appreciation Boxes</h3>
+        <p>Individually packaged treats for staff appreciation days, onboarding, holidays, and company milestones.</p>
+        <ul class="sizes" aria-label="Example sizes"><li>25 treats</li><li>50 treats</li><li>100 treats</li></ul>
+      </article>
+
+      <article class="card">
+        <span class="tag">Celebrations</span>
+        <h3>Office Birthday Packages</h3>
+        <p>Treats for birthdays, work anniversaries, and team celebrations, so nobody gets forgotten.</p>
+      </article>
+
+      <article class="card">
+        <span class="tag">Meetings &amp; events</span>
+        <h3>Office Dessert Catering</h3>
+        <p>Dessert platters for meetings, trainings, conferences, and staff celebrations. One-time orders have a higher minimum spend.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap" id="menu">
+    <p class="kicker">The menu</p>
+    <h2 class="title">Baked fresh, rotated often</h2>
+    <p class="sub">Pick your favorites or let us rotate the lineup each week.</p>
+
+    <div class="menu">
+      <div class="menu-col">
+        <h3>Cookies &amp; brownies</h3>
+        <ul>
+          <li>Chocolate chip</li>
+          <li>Double chocolate</li>
+          <li>Cranberry walnut <span class="nut">contains nuts</span></li>
+          <li>Peanut butter <span class="nut">contains peanuts</span></li>
+          <li>Homemade brownies, from scratch</li>
+        </ul>
+      </div>
+      <div class="menu-col">
+        <h3>Sweet breads &amp; muffins</h3>
+        <p class="menu-note">Choose sweet bread, muffins, or mini muffins.</p>
+        <ul>
+          <li>Banana nut <span class="nut">contains nuts</span></li>
+          <li>Chocolate chip</li>
+          <li>Blueberry lemon</li>
+          <li>Pumpkin</li>
+          <li>Zucchini</li>
+        </ul>
+      </div>
+      <div class="menu-col soon">
+        <h3>Cupcakes</h3>
+        <p class="menu-note">Four flavors, coming soon.</p>
+        <ul>
+          <li class="slot">Flavor 1</li>
+          <li class="slot">Flavor 2</li>
+          <li class="slot">Flavor 3</li>
+          <li class="slot">Flavor 4</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="nutfree">
+      <strong>Nut-free office?</strong> We can make your whole order without nut ingredients. Just tell us when you request a quote.
+    </div>
+  </section>
+
+  <section class="perks">
+    <div class="wrap">
+      <p class="kicker">Ordering consistently pays off</p>
+      <h2 class="title">Rewarding the companies that stick around</h2>
+      <p class="sub">Instead of discounting everything, we reward regular orders with a modest benefit and a predictable schedule.</p>
+      <div class="tiers">
+        <div class="tier"><h3>One-time order</h3><p class="what">Standard pricing</p><p>Great for a single event or to try us out.</p></div>
+        <div class="tier"><h3>Weekly recurring</h3><p class="what">Modest discount or free upgrade</p><p>A small thank-you for ordering every week.</p></div>
+        <div class="tier"><h3>Monthly commitment</h3><p class="what">Fixed package price</p><p>Scheduled delivery with a predictable monthly cost.</p></div>
+        <div class="tier"><h3>Large orders</h3><p class="what">Custom quote</p><p>Based on quantity, packaging, and delivery distance.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" id="inquire">
+    <div class="contact-grid">
+      <div>
+        <p class="kicker">Get started</p>
+        <h2 class="title">Tell us about your team</h2>
+        <p class="sub">Share a few details and we'll follow up with options and a quote.</p>
+      </div>
+
+      <!-- TODO: point action at your form handler (e.g., a Cloudflare Worker endpoint). Left as "#" so nothing is sent yet. -->
+      <form action="#" method="post">
+        <div class="row">
+          <label>Your name<input type="text" name="name" required autocomplete="name"></label>
+          <label>Company<input type="text" name="company" required autocomplete="organization"></label>
+        </div>
+        <div class="row">
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Phone<input type="tel" name="phone" autocomplete="tel"></label>
+        </div>
+        <div class="row">
+          <label>What are you interested in?
+            <select name="interest">
+              <option>Treat Tuesdays (weekly)</option>
+              <option>Employee appreciation boxes</option>
+              <option>Office birthday packages</option>
+              <option>Meeting or event platters</option>
+              <option>Not sure yet</option>
+            </select>
+          </label>
+          <label>Approximate headcount<input type="number" name="headcount" min="1" inputmode="numeric" placeholder="e.g. 40"></label>
+        </div>
+        <label>Anything else we should know?<textarea name="notes" placeholder="Delivery address, preferred day, allergies, dates"></textarea></label>
+        <button type="submit" class="btn btn-solid">Request a quote</button>
+        <p class="fine">Please let us know about any food allergies on your team when you reach out.</p>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <a href="index.html" class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Liquid Dough</span></a>
+      <a href="#inquire" class="btn btn-outline">Request a quote</a>
+    </div>
+    <p class="copy">© 2026 Liquid Dough</p>
+  </div>
+</footer>
+
+</body>
+</html>
