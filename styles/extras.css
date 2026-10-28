@@ -211,7 +211,7 @@ button.btn-rust { cursor: pointer; font-family: 'Lato', sans-serif; }
   display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem;
   max-width: 1100px; margin: 0 auto;
 }
-.flyer { display: block; flex: 0 0 calc((100% - 4.5rem) / 4); background: var(--dark); overflow: hidden; transition: transform .3s; }
+.flyer { display: block; align-self: flex-start; flex: 0 0 calc((100% - 4.5rem) / 4); background: var(--dark); overflow: hidden; transition: transform .3s; }
 .flyer:hover { transform: translateY(-4px); }
 .flyer img { display: block; width: 100%; height: auto; }
 .flyer.past img { filter: grayscale(1); opacity: .92; }
@@ -244,6 +244,8 @@ button.btn-rust { cursor: pointer; font-family: 'Lato', sans-serif; }
 .quote-form .form-status.err { color: #a02020; background: none; }
 .coming-soon .form-status { text-transform: none; letter-spacing: 0; font-size: 1rem; font-weight: 700; margin: .25rem 0 0; color: #fff; }
 
-.flyer .frame { display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5; background: #ececec; }
-.flyer .frame img { width: auto; height: auto; max-width: 100%; max-height: 100%; }
+.flyer { background: #ececec; }
+.flyer .frame { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; aspect-ratio: 4 / 5; background: #ececec; }
+.flyer .frame img.bg { position: absolute; inset: -24px; width: calc(100% + 48px); height: calc(100% + 48px); max-width: none; max-height: none; object-fit: cover; filter: blur(16px) grayscale(1); opacity: .85; }
+.flyer .frame img:not(.bg) { position: relative; width: auto; height: auto; max-width: 100%; max-height: 100%; }
 @media (max-width: 900px) { .flyer { flex-basis: calc((100% - 1.5rem) / 2); } }
